@@ -1,0 +1,21 @@
+.monForm {
+        display: flex;
+        justify-content: space-between;
+        padding: 1%;
+    
+        .subForm {
+            width: 49%; 
+    
+            &.saisieForm {
+                box-shadow: 0 0 10px black;
+                border-radius: 10px;
+                padding: 1%;
+            }
+    
+            &.visuForm {
+                box-shadow: 0 0 10px black;
+                border-radius: 10px;
+                padding: 1%;
+            }
+        }
+    }

@@ -1,0 +1,111 @@
+<div class="monForm">
+    <section class="subForm saisieForm">
+        <h2>Nouveau CD</h2>
+        <form [formGroup]="formulaire">
+            <div class="form-group">
+                <label for="titre">Titre</label>
+                <div class="input">
+                    <input type="text" class="form-control" id="titre" formControlName="titre"/>
+                    <div *ngIf="formulaire.get('titre')?.invalid &&
+                                formulaire.get('titre')?.errors &&
+                                (formulaire.get('titre')?.dirty || formulaire.get('title')?.touched)">
+                        <small class="text-danger" *ngIf="formulaire.get('titre')?.hasError('required')">
+                            Ce champ est requis.
+                        </small>
+                        <small class="text-danger" *ngIf="formulaire.get('titre')?.hasError('minlength')">
+                            Ce champ doit comporter au moins 6 caractères.
+                        </small>
+                    </div>
+                </div>
+                
+                <label for="auteur">Auteur</label>
+                <div class="input">
+                    <input type="text" class="form-control" id="auteur" formControlName="auteur"/>
+                    <div *ngIf="formulaire.get('auteur')?.invalid &&
+                                formulaire.get('auteur')?.errors &&
+                                (formulaire.get('auteur')?.dirty || formulaire.get('auteur')?.touched)">
+                        <small class="text-danger" *ngIf="formulaire.get('auteur')?.hasError('required')">
+                            Ce champ est requis.
+                        </small>
+                        <small class="text-danger" *ngIf="formulaire.get('auteur')?.hasError('minlength')">
+                            Ce champ doit comporter au moins 6 caractères.
+                        </small>
+                    </div>
+                </div>
+                
+                <label for="miniature">miniature</label>
+                <div class="input">
+                    <input type="text" class="form-control" id="miniature" formControlName="miniature"/>
+                    <div *ngIf="formulaire.get('miniature')?.invalid &&
+                                formulaire.get('miniature')?.errors &&
+                                (formulaire.get('miniature')?.dirty || formulaire.get('miniature')?.touched)">
+                        <small class="text-danger" *ngIf="formulaire.get('miniature')?.hasError('required')">
+                            Ce champ est requis.
+                        </small>
+                        <small class="text-danger" *ngIf="formulaire.get('miniature')?.hasError('pattern')">
+                            Ce champ doit être un url valide.
+                        </small>
+                    </div>
+                </div>
+
+                <label for="dateDeSortie">Date de sortie</label>
+                <div class="input">
+                    <input type="date" class="form-control" id="dateDeSortie" formControlName="dateDeSortie"/>
+                    <div *ngIf="formulaire.get('dateDeSortie')?.invalid &&
+                                formulaire.get('dateDeSortie')?.errors &&
+                                (formulaire.get('dateDeSortie')?.dirty || formulaire.get('dateDeSortie')?.touched)">
+                        <small class="text-danger" *ngIf="formulaire.get('dateDeSortie')?.hasError('required')">
+                            Ce champ est requis.
+                        </small>
+                        <small class="text-danger" *ngIf="formulaire.get('dateDeSortie')?.hasError('min')">
+                            Ce champ ne doit pas être vide.
+                        </small>
+                    </div>
+                </div>
+
+                <label for="quantite">quantite</label>
+                <div class="input">
+                    <input type="number" class="form-control" id="quantite" formControlName="quantite"/>
+                    <div *ngIf="formulaire.get('quantite')?.invalid &&
+                                formulaire.get('quantite')?.errors &&
+                                (formulaire.get('quantite')?.dirty || formulaire.get('quantite')?.touched)">
+                        <small class="text-danger" *ngIf="formulaire.get('quantite')?.hasError('required')">
+                            Ce champ est requis.
+                        </small>
+                        <small class="text-danger" *ngIf="formulaire.get('quantite')?.hasError('min')">
+                            Ce champ ne doit pas être infèrieur à 0.
+                        </small>
+                    </div>
+                </div>
+
+                <label for="prix">prix</label>
+                <div class="input">
+                    <input type="number" class="form-control" id="prix" formControlName="prix"/>
+                    <div *ngIf="formulaire.get('prix')?.invalid &&
+                                formulaire.get('prix')?.errors &&
+                                (formulaire.get('prix')?.dirty || formulaire.get('prix')?.touched)">
+                        <small class="text-danger" *ngIf="formulaire.get('prix')?.hasError('required')">
+                            Ce champ est requis.
+                        </small>
+                        <small class="text-danger" *ngIf="formulaire.get('prix')?.hasError('min')">
+                            Ce champ ne doit pas être infèrieur à 0.
+                        </small>
+                    </div>
+                </div>
+                
+                <button type="submit" (click)="validationFormulaire()" [disabled]="formulaire.invalid">Valider</button>
+            </div>
+        </form>
+    </section>
+    <section class="subForm visuForm">
+        <h2>Vue du CD</h2>
+        <div *ngIf="currentCD !== undefined">
+            <h3>{{currentCD.titre}}</h3>
+            <p>Sortie le : {{currentCD.dateDeSortie | date: 'dd/MM/yyyy'}}</p>
+            <p>Auteur / groupe : {{currentCD.autheur}}</p>
+            <p>Prix : {{currentCD.prix | currency: 'EUR'}}</p>
+            <p>Quantité : {{currentCD.quantite}}</p>
+            <img [src]="currentCD.miniature" alt="{{currentCD.titre}}">
+        </div>
+    </section>
+</div>
